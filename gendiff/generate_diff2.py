@@ -3,7 +3,6 @@ def generate_diff(file1, file2):
     key2 = sorted(file2.keys())
     total_key = key1 + key2
     setkey = sorted(set(total_key))
-    result = {}
     answer = ''
     for i in setkey:
         if (i in key1 and i in key2):
