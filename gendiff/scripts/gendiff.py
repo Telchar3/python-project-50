@@ -1,7 +1,13 @@
 #!/usr/bin/env python3
 import argparse
 import json
+import yaml
 from gendiff.generate_diff2 import generate_diff
+
+
+def read_yaml(path_yaml):
+    with open(path_yaml, 'r') as file:
+        return yaml.safe_load(file)
 
 
 def read_json(file_path):
@@ -23,11 +29,15 @@ def main():
     if args.format:
         print(f'Output format: {args.format}')
 
-    file1_data = read_json(args.first_file)
-    file2_data = read_json(args.second_file)
+    if args.format == 'json':
+        file1_data = read_json(args.first_file)
+        file2_data = read_json(args.second_file)
+        diff = generate_diff(file1_data, file2_data)
+        print(diff)
 
-    diff = generate_diff(file1_data, file2_data)
-    print(diff)
+    elif args.format == 'yaml' or args.format == 'yml':
+        file1_dat = read_yaml(args.first_file)
+        file2_dat = read_yaml(args.second_file)
 
 
 if __name__ == '__main__':
