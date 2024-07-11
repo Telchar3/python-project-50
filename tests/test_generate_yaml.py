@@ -1,5 +1,5 @@
 import yaml
-from gendiff. 
+from gendiff.generate_diff2 import generate_diff
 
 
 def difference():
@@ -9,12 +9,5 @@ def difference():
         filepath2 = yaml.safe_load(f)
 
     result = generate_diff(filepath1, filepath2)
-    excepted_result = '{
-    - follow: false
-      host: hexlet.io
-    - proxy: 123.234.53.22
-    - timeout: 50
-    + timeout: 20
-    + verbose: true
-    }'
-
+    excepted_result = '- follow: false\n  host: hexlet.io\n- proxy: 123.234.53.22\n- timeout: 50\n+ timeout: 20\n+ verbose: true'
+    assert result == excepted_result
